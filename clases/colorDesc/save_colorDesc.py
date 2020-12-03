@@ -14,24 +14,20 @@ output = open("colorDes.json", "w")
 
 write = []
 
+print("Reading images...")
 # use glob to grab the image paths and loop over them
-for imagePath in glob.glob("../../archive/leafsnap-dataset/dataset/images/field/abies_concolor/*.jpg"):
-	# extract the image ID (i.e. the unique filename) from the image
-	# path and load the image itself
-	imageID = imagePath[imagePath.rfind("/") + 1:]
+n_files = len(glob.glob("./archive/leafsnap-dataset/dataset/images/field/*/*.jpg"))
+current_file = 1
+for imagePath in glob.glob("./archive/leafsnap-dataset/dataset/images/field/*/*.jpg"):
+	print(str(current_file / n_files * 100), end='\r', flush=True)
 	image = cv2.imread(imagePath)
-
-	# sift = Sift()
-	# grey = sift.to_gray( imgtest )
-	# kp = sift.sift_detect( grey )
-
-	# features = sift.keypointList( image )
 	features = cd.describe( image )
 	features = [float(f) for f in features]
-	write.append({ 'imagePath': imageID, 'vector': features })
-
+	write.append({ 'imagePath': imagePath, 'vector': features })
+	current_file += 1
 st = json.dumps( write )
 output.write( st )
 
 # close the index file
 output.close()
+print("\nDONE!")

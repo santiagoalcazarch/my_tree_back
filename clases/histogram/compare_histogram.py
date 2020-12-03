@@ -11,7 +11,7 @@ def histogram_intersection(hist_1, hist_2):
 with open('hist.json') as f:
 	data = json.load(f)
 
-clientImage = cv2.imread("../../archive/leafsnap-dataset/dataset/images/field/abies_concolor/12995307070714.jpg")
+clientImage = cv2.imread("test.jpg")
 hist, bins = np.histogram(clientImage.ravel(),256,[0,256])
 hist = [ float(f) for f in hist ]
 
@@ -22,4 +22,6 @@ for carga in data:
 	compare_hist.append( { 'value': hist_int, 'imagePath': carga['imagePath'] } )
 
 newlist = sorted(compare_hist, key=lambda k: k['value']) 
-print( newlist )
+print(newlist[len(newlist) - 1]["value"])
+spplited = newlist[0]["imagePath"].split("/")
+print(spplited[len(spplited) - 2])

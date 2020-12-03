@@ -111,10 +111,7 @@ def directionality(image):
 
 if __name__ == '__main__':
 	img = cv2.imread('test.jpg',cv2.IMREAD_GRAYSCALE)
-	print(img.shape)
-	fcrs = coarseness(img, 1)
-	print("coarseness: %f" % fcrs);
 	fcon = contrast(img)
 	print("contrast: %f" % fcon)
-	fdir= directionality(img)
-	print("directionality: %f" % fdir)
+	# fdir= directionality(img)
+	# print("directionality: %f" % fdir)
