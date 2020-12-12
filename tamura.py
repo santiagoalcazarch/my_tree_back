@@ -113,5 +113,5 @@ if __name__ == '__main__':
 	img = cv2.imread('test.jpg',cv2.IMREAD_GRAYSCALE)
 	fcon = contrast(img)
 	print("contrast: %f" % fcon)
-	# fdir= directionality(img)
-	# print("directionality: %f" % fdir)
+	fdir= directionality(img)
+	print("directionality: %f" % fdir)
