@@ -230,24 +230,23 @@ class Tamura:
     def euclidean_distance(self, x, y):
         return sqrt(sum(pow(a-b,2) for a, b in zip(x, y)))
 
-    def describe(self, img, resize=True):
-        if resize is True:
-            scale_percent = 1 # percent of original size
-            width = int(img.shape[1] * scale_percent / 100)
-            height = int(img.shape[0] * scale_percent / 100)
-            dim = (width, height)
-            # resize image
-            resized = cv2.resize(img, dim, interpolation = cv2.INTER_AREA)
-        else:
-            resized = img
+    def describe(self, img):
+        scale_percent = 1 # percent of original size
+        width = int(img.shape[1] * scale_percent / 100)
+        height = int(img.shape[0] * scale_percent / 100)
+        dim = (width, height)
+        # resize image
+        resized = cv2.resize(img, dim)
         coar = self.coarseness(resized, 3)
-        return self.normalize([self.directionality(resized), coar])
+        cont = self.contrast(resized)
+        dire = self.directionality(resized)
+        return self.normalize([cont, coar, dire])
 
     def run(self):
         with open('tamura.json') as f:
             data = json.load(f)
 
-        clientImage = cv2.imread("image.jpg")
+        clientImage = cv2.imread("image.jpg", cv2.IMREAD_GRAYSCALE)
 
         features = self.describe(clientImage)
         features = [float(f) for f in features]
