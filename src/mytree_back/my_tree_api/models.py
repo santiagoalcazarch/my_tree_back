@@ -240,8 +240,8 @@ class Tamura:
             resized = cv2.resize(img, dim, interpolation = cv2.INTER_AREA)
         else:
             resized = img
-        coar = self.coarseness(resized, 1)
-        return self.normalize([0, coar])
+        coar = self.coarseness(resized, 3)
+        return self.normalize([self.directionality(resized), coar])
 
     def run(self):
         with open('tamura.json') as f:

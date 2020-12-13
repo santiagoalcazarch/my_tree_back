@@ -119,6 +119,11 @@ USE_L10N = True
 
 USE_TZ = True
 
+ALLOWED_HOSTS = [
+    '192.168.0.101',
+    '192.168.0.4'
+]
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
