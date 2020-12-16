@@ -46,6 +46,7 @@ class CBIRView(APIView):
         count = 0
         images = []
         for imagePath in glob.glob(imagesPath):
+            count += 1
             if count == n: break
             with open(imagePath, "rb") as img_file:
                 images.append(base64.b64encode(img_file.read()))
